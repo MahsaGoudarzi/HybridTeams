@@ -1,6 +1,7 @@
 import { useState } from "react";
 import HButton from "@/components/HButton";
 import { FormEvent } from "react";
+import getConfig from 'next/config';
 type SuccessState = boolean | undefined | null;
 const { publicRuntimeConfig } = getConfig();
 export default function CreateForm() {
