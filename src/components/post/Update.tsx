@@ -5,7 +5,8 @@ import { FormEvent } from "react";
 import { useRouter } from "next/router";
 import HLoading from "@/components/HLoading";
 type SuccessState = boolean | undefined | null;
-
+import getConfig from 'next/config';
+const { publicRuntimeConfig } = getConfig();
 export default function EditForm(props: any) {
   const router = useRouter();
   const { id } = router.query;
@@ -13,7 +14,7 @@ export default function EditForm(props: any) {
   
   useEffect(() => {
     if (id) {
-      fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      fetch(`${publicRuntimeConfig.BASE_URL}/posts/${id}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
@@ -47,7 +48,7 @@ export default function EditForm(props: any) {
 
     try {
       const response = await fetch(
-        `https://jsonplaceholder.typicode.com/posts/${id}`,
+        `${publicRuntimeConfig.BASE_URL}/posts/${id}`,
         {
           method: "PUT",
           body: JSON.stringify(postData),

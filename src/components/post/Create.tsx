@@ -2,6 +2,7 @@ import { useState } from "react";
 import HButton from "@/components/HButton";
 import { FormEvent } from "react";
 type SuccessState = boolean | undefined | null;
+const { publicRuntimeConfig } = getConfig();
 export default function CreateForm() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -17,7 +18,7 @@ export default function CreateForm() {
 
     try {
       const response = await fetch(
-        "https://jsonplaceholder.typicode.com/posts",
+        `${publicRuntimeConfig.BASE_URL}/posts`,
         {
           method: "POST",
           body: JSON.stringify(postData),

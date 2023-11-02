@@ -5,14 +5,15 @@ import PostCard from "@/components/post/Card";
 import HButton from "@/components/HButton";
 import HLoading from "@/components/HLoading";
 import { PostData } from "@/type/post";
-
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
 export default function Posts() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedPosts, setLoadedPosts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
+    fetch(`${publicRuntimeConfig.BASE_URL}/posts`)
       .then((res) => res.json())
       .then((data) => {
         setLoadedPosts(data);

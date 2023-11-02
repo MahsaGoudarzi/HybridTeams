@@ -8,7 +8,8 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { PostData } from "@/type/post";
 import { useRouter } from "next/router";
-
+import getConfig from 'next/config';
+const { publicRuntimeConfig } = getConfig();
 export default function Post() {
   const router = useRouter();
   const { id } = router.query;
@@ -17,7 +18,7 @@ export default function Post() {
   const [laodedPost, setLaodedPost] = useState<PostData | null>(null);
   useEffect(() => {
     if (id) {
-      fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      fetch(`${publicRuntimeConfig.BASE_URL}/posts/${id}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
@@ -37,7 +38,7 @@ export default function Post() {
 
   const deletePostHandler = () => {
     if (laodedPost) {
-      fetch(`https://jsonplaceholder.typicode.com/posts/${laodedPost?.id}`, {
+      fetch(`${publicRuntimeConfig.BASE_URL}/posts/${laodedPost?.id}`, {
         method: "DELETE",
       })
         .then((response) => {
