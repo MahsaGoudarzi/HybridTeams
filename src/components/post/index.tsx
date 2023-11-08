@@ -9,6 +9,7 @@ import Link from "next/link";
 import { PostData } from "@/type/post";
 import { useRouter } from "next/router";
 import getConfig from 'next/config';
+
 const { publicRuntimeConfig } = getConfig();
 export default function Post() {
   const router = useRouter();
